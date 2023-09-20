@@ -33,8 +33,14 @@ try:
     streamlit.error("please select the fruit to get information")
 
   else:
-    back_from_function = get_fruityvice_data(fruit_choice)
-    streamlit.dataframe(back_from_function)
+   fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
+   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+   streamlit.dataframe(fruityvice_normalised)
+
+except URLError as e:
+ streamlit.error()
+ 
+    
   
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
