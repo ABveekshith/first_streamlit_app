@@ -34,6 +34,9 @@ try:
   else:
    back_from_function = get_fruityvice_data(fruity_choice)
    streamlit.dataframe(back_from_function)
+except Exception as e:
+  print(e)
+ 
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
